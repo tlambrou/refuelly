@@ -127,6 +127,13 @@ ALTER TABLE ONLY schema_migrations
 
 
 --
+-- Name: index_on_cafes_location; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_on_cafes_location ON cafes USING gist (st_geographyfromtext((((('SRID=4326;POINT('::text || longitude) || ' '::text) || latitude) || ')'::text)));
+
+
+--
 -- PostgreSQL database dump complete
 --
 
@@ -134,6 +141,7 @@ SET search_path TO "$user", public;
 
 INSERT INTO "schema_migrations" (version) VALUES
 ('20180111024614'),
-('20180111025336');
+('20180111025336'),
+('20180111042323');
 
 
