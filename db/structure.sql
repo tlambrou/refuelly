@@ -54,6 +54,39 @@ CREATE TABLE ar_internal_metadata (
 
 
 --
+-- Name: cafes; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE cafes (
+    id bigint NOT NULL,
+    name character varying,
+    latitude numeric(9,6),
+    longitude numeric(9,6),
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: cafes_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE cafes_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: cafes_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE cafes_id_seq OWNED BY cafes.id;
+
+
+--
 -- Name: schema_migrations; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -63,11 +96,26 @@ CREATE TABLE schema_migrations (
 
 
 --
+-- Name: cafes id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY cafes ALTER COLUMN id SET DEFAULT nextval('cafes_id_seq'::regclass);
+
+
+--
 -- Name: ar_internal_metadata ar_internal_metadata_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY ar_internal_metadata
     ADD CONSTRAINT ar_internal_metadata_pkey PRIMARY KEY (key);
+
+
+--
+-- Name: cafes cafes_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY cafes
+    ADD CONSTRAINT cafes_pkey PRIMARY KEY (id);
 
 
 --
@@ -84,5 +132,7 @@ ALTER TABLE ONLY schema_migrations
 
 SET search_path TO "$user", public;
 
+INSERT INTO "schema_migrations" (version) VALUES
+('20180111024614');
 
 
